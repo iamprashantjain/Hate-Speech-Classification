@@ -47,21 +47,21 @@ class TrainPipeline:
         
     
 
-    # def start_data_transformation(self, data_ingestion_artifacts = DataIngestionArtifacts) -> DataTransformationArtifacts:
-    #     logging.info("Entered the start_data_transformation method of TrainPipeline class")
-    #     try:
-    #         data_transformation = DataTransformation(
-    #             data_ingestion_artifacts = data_ingestion_artifacts,
-    #             data_transformation_config=self.data_transformation_config
-    #         )
+    def start_data_transformation(self, data_ingestion_artifacts = DataIngestionArtifacts) -> DataTransformationArtifacts:
+        logging.info("Entered the start_data_transformation method of TrainPipeline class")
+        try:
+            data_transformation = DataTransformation(
+                data_ingestion_artifacts = data_ingestion_artifacts,
+                data_transformation_config=self.data_transformation_config
+            )
 
-    #         data_transformation_artifacts = data_transformation.initiate_data_transformation()
+            data_transformation_artifacts = data_transformation.initiate_data_transformation()
             
-    #         logging.info("Exited the start_data_transformation method of TrainPipeline class")
-    #         return data_transformation_artifacts
+            logging.info("Exited the start_data_transformation method of TrainPipeline class")
+            return data_transformation_artifacts
 
-    #     except Exception as e:
-    #         raise CustomException(e, sys) from e
+        except Exception as e:
+            raise CustomException(e, sys) from e
         
 
     
@@ -120,9 +120,9 @@ class TrainPipeline:
         try:
             data_ingestion_artifacts = self.start_data_ingestion()
 
-            # data_transformation_artifacts = self.start_data_transformation(
-            #     data_ingestion_artifacts=data_ingestion_artifacts
-            # )
+            data_transformation_artifacts = self.start_data_transformation(
+                data_ingestion_artifacts=data_ingestion_artifacts
+            )
 
             # model_trainer_artifacts = self.start_model_trainer(
             #     data_transformation_artifacts=data_transformation_artifacts

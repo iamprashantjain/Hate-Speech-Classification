@@ -8,11 +8,9 @@ class DataIngestionArtifacts:
 
 
 
-# @dataclass
-# class DataTransformationArtifacts:
-#     transformed_data_path: str
-
-
+@dataclass
+class DataTransformationArtifacts:
+    transformed_data_path: str
 
 
 # @dataclass
