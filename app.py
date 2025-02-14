@@ -1,13 +1,13 @@
 from hate.pipeline.train_pipeline import TrainPipeline
 # from fastapi import FastAPI
 # import uvicorn
-# import sys
+import sys
 # from fastapi.templating import Jinja2Templates
 # from starlette.responses import RedirectResponse
 # from fastapi.responses import Response
-# from hate.pipeline.prediction_pipeline import PredictionPipeline
-# from hate.exception import CustomException
-# from hate.constants import *
+from hate.pipeline.prediction_pipeline import PredictionPipeline
+from hate.exception import CustomException
+from hate.constants import *
 
 
 obj = TrainPipeline()
@@ -50,10 +50,5 @@ obj.run_pipeline()
 #         raise CustomException(e, sys) from e
     
 
-
-
 # if __name__=="__main__":
 #     uvicorn.run(app, host=APP_HOST, port=APP_PORT)
-
-
-    

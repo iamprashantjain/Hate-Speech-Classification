@@ -65,20 +65,20 @@ class TrainPipeline:
         
 
     
-    # def start_model_trainer(self, data_transformation_artifacts: DataTransformationArtifacts) -> ModelTrainerArtifacts:
-    #     logging.info(
-    #         "Entered the start_model_trainer method of TrainPipeline class"
-    #     )
-    #     try:
-    #         model_trainer = ModelTrainer(data_transformation_artifacts=data_transformation_artifacts,
-    #                                     model_trainer_config=self.model_trainer_config
-    #                                     )
-    #         model_trainer_artifacts = model_trainer.initiate_model_trainer()
-    #         logging.info("Exited the start_model_trainer method of TrainPipeline class")
-    #         return model_trainer_artifacts
+    def start_model_trainer(self, data_transformation_artifacts: DataTransformationArtifacts) -> ModelTrainerArtifacts:
+        logging.info(
+            "Entered the start_model_trainer method of TrainPipeline class"
+        )
+        try:
+            model_trainer = ModelTrainer(data_transformation_artifacts=data_transformation_artifacts,
+                                        model_trainer_config=self.model_trainer_config
+                                        )
+            model_trainer_artifacts = model_trainer.initiate_model_trainer()
+            logging.info("Exited the start_model_trainer method of TrainPipeline class")
+            return model_trainer_artifacts
 
-    #     except Exception as e:
-    #         raise CustomException(e, sys) 
+        except Exception as e:
+            raise CustomException(e, sys) 
         
 
     
@@ -124,9 +124,9 @@ class TrainPipeline:
                 data_ingestion_artifacts=data_ingestion_artifacts
             )
 
-            # model_trainer_artifacts = self.start_model_trainer(
-            #     data_transformation_artifacts=data_transformation_artifacts
-            # )
+            model_trainer_artifacts = self.start_model_trainer(
+                data_transformation_artifacts=data_transformation_artifacts
+            )
 
             # model_evaluation_artifacts = self.start_model_evaluation(model_trainer_artifacts=model_trainer_artifacts,
             #                                                         data_transformation_artifacts=data_transformation_artifacts
