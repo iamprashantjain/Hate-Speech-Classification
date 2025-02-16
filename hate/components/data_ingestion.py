@@ -1,9 +1,10 @@
 import os
+import shutil   #to copy files in windows
 import sys
 from zipfile import ZipFile  #to unzip zip file
 from hate.logger import logging
 from hate.exception import CustomException
-from hate.configuration.gcloud_syncer import GCloudSync
+# from hate.configuration.gcloud_syncer import GCloudSync
 from hate.entity.config_entity import DataIngestionConfig
 from hate.entity.artifact_entity import DataIngestionArtifacts
 
@@ -11,25 +12,46 @@ from hate.entity.artifact_entity import DataIngestionArtifacts
 class DataIngestion:
     def __init__(self, data_ingestion_config : DataIngestionConfig):
         self.data_ingestion_config = data_ingestion_config
-        self.gcloud = GCloudSync()
+        # self.gcloud = GCloudSync()
 
 
+    # def get_data_from_gcloud(self) -> None:
+    #     try:
+    #         logging.info("Entered the get_data_from_gcloud method of Data ingestion class")
+    #         os.makedirs(self.data_ingestion_config.DATA_INGESTION_ARTIFACTS_DIR, exist_ok=True)
+
+    #         self.gcloud.sync_folder_from_gcloud(self.data_ingestion_config.BUCKET_NAME,
+    #                                             self.data_ingestion_config.ZIP_FILE_NAME,
+    #                                             self.data_ingestion_config.DATA_INGESTION_ARTIFACTS_DIR,
+    #                                             )
+            
+    #         logging.info("Exited the get_data_from_gcloud method of Data ingestion class")
+
+        
+    #     except Exception as e:
+    #         raise CustomException(e, sys) from e
+        
+        
+        
     def get_data_from_gcloud(self) -> None:
         try:
             logging.info("Entered the get_data_from_gcloud method of Data ingestion class")
             os.makedirs(self.data_ingestion_config.DATA_INGESTION_ARTIFACTS_DIR, exist_ok=True)
-
-            self.gcloud.sync_folder_from_gcloud(self.data_ingestion_config.BUCKET_NAME,
-                                                self.data_ingestion_config.ZIP_FILE_NAME,
-                                                self.data_ingestion_config.DATA_INGESTION_ARTIFACTS_DIR,
-                                                )
+            
+            dataset_source_path = os.path.join("dataset", self.data_ingestion_config.ZIP_FILE_NAME)
+            dataset_destination_path = os.path.join(self.data_ingestion_config.DATA_INGESTION_ARTIFACTS_DIR, self.data_ingestion_config.ZIP_FILE_NAME)
+            
+            if os.path.exists(dataset_source_path):
+                shutil.copy2(dataset_source_path, dataset_destination_path)  # ✅ Uses Python's built-in copy function
+                logging.info(f"Copied dataset from {dataset_source_path} to {dataset_destination_path}")
+            else:
+                raise FileNotFoundError(f"Dataset zip file not found at {dataset_source_path}")
             
             logging.info("Exited the get_data_from_gcloud method of Data ingestion class")
 
-        
         except Exception as e:
             raise CustomException(e, sys) from e
-        
+                
     
     def unzip_and_clean(self):
         logging.info("Entered the unzip_and_clean method of Data ingestion class")

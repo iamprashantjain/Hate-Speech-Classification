@@ -69,3 +69,4 @@ class ModelPusherConfig:
         self.TRAINED_MODEL_PATH = os.path.join(os.getcwd(),ARTIFACTS_DIR, MODEL_TRAINER_ARTIFACTS_DIR)
         self.BUCKET_NAME = BUCKET_NAME
         self.MODEL_NAME = MODEL_NAME
+        self.DATASET_DIR = os.path.join(os.getcwd(), "dataset")     #save model locally instead of gcloud

@@ -1,3 +1,7 @@
+fastapi
+uvicorn
+starlette
+pydantic
 numpy 
 pandas 
 tensorflow==2.9.2

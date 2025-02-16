@@ -26,10 +26,9 @@ class TrainPipeline:
         self.data_transformation_config = DataTransformationConfig()
         self.model_trainer_config = ModelTrainerConfig()
         self.model_evaluation_config =ModelEvaluationConfig()
-        self.model_pusher_config = ModelPusherConfig()
+        # self.model_pusher_config = ModelPusherConfig()
 
-
-    
+ 
 
     def start_data_ingestion(self) -> DataIngestionArtifacts:
         logging.info("Entered the start_data_ingestion method of TrainPipeline class")
@@ -135,7 +134,7 @@ class TrainPipeline:
             if not model_evaluation_artifacts.is_model_accepted:
                 raise Exception("Trained model is not better than the best model")
             
-            model_pusher_artifacts = self.start_model_pusher()
+            # model_pusher_artifacts = self.start_model_pusher()
 
             logging.info("Exited the run_pipeline method of TrainPipeline class") 
 
